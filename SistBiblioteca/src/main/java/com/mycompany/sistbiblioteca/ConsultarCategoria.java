@@ -4,12 +4,21 @@
  */
 package com.mycompany.sistbiblioteca;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author teste123
  */
 public class ConsultarCategoria extends javax.swing.JInternalFrame {
-
+    private Connection con; // guarda informacoes da conexao
+    private Statement stm; // guadrda informacoes da instancia de conexao criada
+    private ResultSet res; // guarda lista de dados consultados
     /**
      * Creates new form ConsultarCategoria
      */
@@ -33,6 +42,7 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
 
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(this::jbConsultarActionPerformed);
 
         jbAtualizar.setText("Atualizar");
 
@@ -68,15 +78,15 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jbConsultar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jbAtualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(jbExcluir)
                 .addGap(63, 63, 63))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbConsultar)
+                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,6 +104,24 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DAO banco = new DAO();
+        String comando = "SELECT * FROM categoria;";
+        model.setNumRows(0);
+        res = banco.consultar(comando);
+        try {
+            while(res.next()){
+                model.addRow(new Object[]{
+                res.getString("id"),
+                res.getString("descricao")
+                });
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao consultar dados");
+        }
+    }//GEN-LAST:event_jbConsultarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
