@@ -4,6 +4,8 @@
  */
 package com.mycompany.sistbiblioteca;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author afonsvfdeb
@@ -27,17 +29,17 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBconsultaMain = new javax.swing.JButton();
+        jBcadastroMain = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem1 = new javax.swing.JMenuItem();
+        CadastroU = new javax.swing.JMenuItem();
+        CadastroL = new javax.swing.JMenuItem();
+        CadastroC = new javax.swing.JMenuItem();
+        CadastroE = new javax.swing.JMenuItem();
+        CadastroD = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         openMenuItem1 = new javax.swing.JMenuItem();
         saveMenuItem1 = new javax.swing.JMenuItem();
@@ -49,48 +51,51 @@ public class MainForm extends javax.swing.JFrame {
 
         desktopPane.setBackground(new java.awt.Color(91, 84, 84));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Consultar");
-        desktopPane.add(jButton1);
-        jButton1.setBounds(380, 120, 120, 30);
+        jBconsultaMain.setBackground(new java.awt.Color(0, 0, 0));
+        jBconsultaMain.setText("Consultar");
+        jBconsultaMain.addActionListener(this::jBconsultaMainActionPerformed);
+        desktopPane.add(jBconsultaMain);
+        jBconsultaMain.setBounds(380, 120, 120, 30);
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Cadastrar");
-        desktopPane.add(jButton2);
-        jButton2.setBounds(160, 120, 120, 30);
+        jBcadastroMain.setBackground(new java.awt.Color(0, 0, 0));
+        jBcadastroMain.setText("Cadastrar");
+        jBcadastroMain.addActionListener(this::jBcadastroMainActionPerformed);
+        desktopPane.add(jBcadastroMain);
+        jBcadastroMain.setBounds(160, 120, 120, 30);
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 3, 18)); // NOI18N
         jLabel1.setText("Bem vindo ao gerenciador de bibliotecas!");
         desktopPane.add(jLabel1);
         jLabel1.setBounds(160, 40, 390, 70);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pngwing.com.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/home/afonsvfdeb/Documentos/sistema_biblioteca/SistBiblioteca/src/main/java/imagens/livro.png")); // NOI18N
         desktopPane.add(jLabel2);
         jLabel2.setBounds(490, 40, 260, 410);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Cadastrar");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Usuário");
-        fileMenu.add(openMenuItem);
+        CadastroU.setMnemonic('o');
+        CadastroU.setText("Usuário");
+        CadastroU.addActionListener(this::CadastroUActionPerformed);
+        fileMenu.add(CadastroU);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Livro");
-        fileMenu.add(saveMenuItem);
+        CadastroL.setMnemonic('s');
+        CadastroL.setText("Livro");
+        fileMenu.add(CadastroL);
 
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Categoria");
-        exitMenuItem.addActionListener(this::exitMenuItemActionPerformed);
-        fileMenu.add(exitMenuItem);
+        CadastroC.setMnemonic('x');
+        CadastroC.setText("Categoria");
+        CadastroC.addActionListener(this::CadastroCActionPerformed);
+        fileMenu.add(CadastroC);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Empréstimo");
-        fileMenu.add(saveAsMenuItem);
+        CadastroE.setMnemonic('a');
+        CadastroE.setText("Empréstimo");
+        fileMenu.add(CadastroE);
 
-        saveAsMenuItem1.setMnemonic('a');
-        saveAsMenuItem1.setText("Devolução");
-        fileMenu.add(saveAsMenuItem1);
+        CadastroD.setMnemonic('a');
+        CadastroD.setText("Devolução");
+        fileMenu.add(CadastroD);
 
         menuBar.add(fileMenu);
 
@@ -136,13 +141,85 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
+    private void CadastroCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroCActionPerformed
+    }//GEN-LAST:event_CadastroCActionPerformed
 
     private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_exitMenuItem1ActionPerformed
+
+    private void CadastroUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroUActionPerformed
+
+        
+        CadastroUsuario form = new CadastroUsuario();
+        desktopPane.add(form);
+        form.setVisible(true);
+
+    }//GEN-LAST:event_CadastroUActionPerformed
+
+    private void jBcadastroMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcadastroMainActionPerformed
+
+       Integer op = Integer.parseInt(JOptionPane.showInputDialog(null,"O que deseja cadastrar?\n[1] Usuario\n"
+                + "[2] Livro\n"
+                + "[3] Categoria\n"
+                + "[4] Empréstimo\n"
+                + "[5] Devolução\n" )) ;
+        
+       
+       if (op != null) { //houve resposta
+        switch (op) {
+            case 1:
+                CadastroUsuario form = new CadastroUsuario();
+                desktopPane.add(form);
+                form.setVisible(true);                
+                break;
+                
+                case 2:
+                // abrirCadastroLivro();
+                break;
+            case 3:
+                // abrirCadastroCategoria();
+                break;
+            case 4: //emprestimo
+                break;
+            case 5: //devolução
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida!");
+        }
+       }
+
+    }//GEN-LAST:event_jBcadastroMainActionPerformed
+
+    private void jBconsultaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultaMainActionPerformed
+        
+       Integer op = Integer.parseInt(JOptionPane.showInputDialog(null,"O que deseja consultar?\n[1] Usuario\n"
+                + "[2] Livro\n"
+                + "[3] Categoria\n"
+                + "[4] Empréstimo\n"
+                + "[5] Devolução\n" )) ;
+
+       if (op != null) { //houve resposta
+        switch (op) {
+            case 1:
+                break;
+                
+                case 2:
+                // abrirCadastroLivro();
+                break;
+            case 3:
+                // abrirCadastroCategoria();
+                break;
+            case 4: //emprestimo
+                break;
+            case 5: //devolução
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opção inválida!");
+        }
+       }
+       
+    }//GEN-LAST:event_jBconsultaMainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,23 +257,23 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CadastroC;
+    private javax.swing.JMenuItem CadastroD;
+    private javax.swing.JMenuItem CadastroE;
+    private javax.swing.JMenuItem CadastroL;
+    private javax.swing.JMenuItem CadastroU;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuItem exitMenuItem1;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBcadastroMain;
+    private javax.swing.JButton jBconsultaMain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem openMenuItem1;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem1;
     private javax.swing.JMenuItem saveAsMenuItem2;
     private javax.swing.JMenuItem saveAsMenuItem3;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JMenuItem saveMenuItem1;
     // End of variables declaration//GEN-END:variables
 
