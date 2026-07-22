@@ -17,8 +17,11 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        setTitle("Sistema de gerenciamento de bibliotecas");
     }
-
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,9 +71,9 @@ public class MainForm extends javax.swing.JFrame {
         desktopPane.add(jLabel1);
         jLabel1.setBounds(160, 40, 390, 70);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/afonsvfdeb/Documentos/sistema_biblioteca/SistBiblioteca/src/main/java/imagens/livro.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/livro.png"))); // NOI18N
         desktopPane.add(jLabel2);
-        jLabel2.setBounds(490, 40, 260, 410);
+        jLabel2.setBounds(500, 20, 260, 410);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Cadastrar");
@@ -131,11 +134,11 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
         );
 
         pack();
@@ -247,7 +250,7 @@ public class MainForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
