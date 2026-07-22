@@ -37,7 +37,6 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
 
         jbConsultar = new javax.swing.JButton();
         jbAtualizar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -45,8 +44,7 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
         jbConsultar.addActionListener(this::jbConsultarActionPerformed);
 
         jbAtualizar.setText("Atualizar");
-
-        jbExcluir.setText("Excluir");
+        jbAtualizar.addActionListener(this::jbAtualizarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,7 +58,7 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -75,31 +73,24 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbConsultar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAtualizar)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jbAtualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
-                .addComponent(jbExcluir)
-                .addGap(63, 63, 63))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbConsultar)
-                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbConsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAtualizar)
-                    .addComponent(jbExcluir))
-                .addGap(75, 75, 75))
+                    .addComponent(jbConsultar))
+                .addGap(69, 69, 69))
         );
 
         pack();
@@ -123,12 +114,23 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbConsultarActionPerformed
 
+    private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
+        DAO banco = new DAO();
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        String comando = "UPDATE categoria set descricao='"+
+                model.getValueAt(jTable1.getSelectedRow(), 1)+
+                "' WHERE id='"+
+                model.getValueAt(jTable1.getSelectedRow(), 0)+
+                "';";
+        banco.atualizar(comando);
+        JOptionPane.showMessageDialog(rootPane,"registro atualizado! ");
+    }//GEN-LAST:event_jbAtualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbConsultar;
-    private javax.swing.JButton jbExcluir;
     // End of variables declaration//GEN-END:variables
 }
