@@ -1,7 +1,8 @@
-com\mycompany\sistbiblioteca\CadastroUsuario.class
-com\mycompany\sistbiblioteca\MainForm$1.class
-POJO\Usuario.class
-com\mycompany\sistbiblioteca\ConsultarLivros.class
-com\mycompany\sistbiblioteca\SistBiblioteca.class
-com\mycompany\sistbiblioteca\CadastrarCategoria.class
-com\mycompany\sistbiblioteca\MainForm.class
+com/mycompany/sistbiblioteca/CadastrarCategoria.class
+com/mycompany/sistbiblioteca/Main.class
+com/mycompany/sistbiblioteca/ConsultarCategoria.class
+com/mycompany/sistbiblioteca/CadastrarLivro.class
+com/mycompany/sistbiblioteca/Main$1.class
+com/mycompany/sistbiblioteca/DAO.class
+com/mycompany/sistbiblioteca/ConsultarCategoria$1.class
+com/mycompany/sistbiblioteca/ConsultarLivros.class
