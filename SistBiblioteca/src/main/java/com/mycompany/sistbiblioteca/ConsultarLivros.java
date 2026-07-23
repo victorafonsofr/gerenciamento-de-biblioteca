@@ -42,6 +42,8 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jbAtualizar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jcbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
 
         jbConsultar.setText("Consultar");
@@ -134,7 +136,6 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
                 ";";
        //UPDATE livro set titulo='TT', autor='AA' ,isbn='00',quantidade=0 where categoria_id=
         banco.atualizar(comando);
-        JOptionPane.showMessageDialog(rootPane,"registro atualizado! ");
     }//GEN-LAST:event_jbAtualizarActionPerformed
     public void listarCategorias(){
             try {

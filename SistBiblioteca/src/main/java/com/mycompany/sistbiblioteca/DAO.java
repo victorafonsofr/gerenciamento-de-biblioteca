@@ -19,7 +19,7 @@ public class DAO {
      private String usuario = "root";
     private String senha = "";
     private String dbDriver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3307/tcdpoo";
+    private String url = "jdbc:mysql://localhost:3306/tcdpoo";
     private Connection con; // guarda informacoes da conexao
     private Statement stm; // guadrda informacoes da instancia de conexao criada
     private ResultSet res; // guarda lista de dados consultados
@@ -51,6 +51,9 @@ public class DAO {
              con = conectar();
              stm = con.createStatement();
              stm.executeUpdate(comando);
+            
+             JOptionPane.showMessageDialog(null, "Registro inserido!");
+
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Erro ao inserir registro");
             
@@ -61,6 +64,7 @@ public class DAO {
              con = conectar();
              stm = con.createStatement();
              stm.executeUpdate(comando);
+             JOptionPane.showMessageDialog(null, "Dados atualizados!");
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Erro ao atualizar dados!");
          }

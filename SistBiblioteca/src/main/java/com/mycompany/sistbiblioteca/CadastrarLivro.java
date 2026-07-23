@@ -47,6 +47,8 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
         jlquantidade = new javax.swing.JLabel();
         jtQuantidade = new javax.swing.JTextField();
 
+        setClosable(true);
+
         jlTitulo.setText("Título");
 
         jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));

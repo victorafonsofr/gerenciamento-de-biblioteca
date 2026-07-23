@@ -44,11 +44,11 @@ public class MainForm extends javax.swing.JFrame {
         CadastroE = new javax.swing.JMenuItem();
         CadastroD = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
-        openMenuItem1 = new javax.swing.JMenuItem();
-        saveMenuItem1 = new javax.swing.JMenuItem();
-        exitMenuItem1 = new javax.swing.JMenuItem();
-        saveAsMenuItem2 = new javax.swing.JMenuItem();
-        saveAsMenuItem3 = new javax.swing.JMenuItem();
+        ConsultarUs = new javax.swing.JMenuItem();
+        ConsultarLi = new javax.swing.JMenuItem();
+        ConsultarCa = new javax.swing.JMenuItem();
+        ConsultarEm = new javax.swing.JMenuItem();
+        ConsultarDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,22 +58,22 @@ public class MainForm extends javax.swing.JFrame {
         jBconsultaMain.setText("Consultar");
         jBconsultaMain.addActionListener(this::jBconsultaMainActionPerformed);
         desktopPane.add(jBconsultaMain);
-        jBconsultaMain.setBounds(380, 120, 120, 30);
+        jBconsultaMain.setBounds(480, 120, 120, 30);
 
         jBcadastroMain.setBackground(new java.awt.Color(0, 0, 0));
         jBcadastroMain.setText("Cadastrar");
         jBcadastroMain.addActionListener(this::jBcadastroMainActionPerformed);
         desktopPane.add(jBcadastroMain);
-        jBcadastroMain.setBounds(160, 120, 120, 30);
+        jBcadastroMain.setBounds(290, 120, 120, 30);
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 3, 18)); // NOI18N
         jLabel1.setText("Bem vindo ao gerenciador de bibliotecas!");
         desktopPane.add(jLabel1);
-        jLabel1.setBounds(160, 40, 390, 70);
+        jLabel1.setBounds(270, 40, 360, 70);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/livro.png"))); // NOI18N
         desktopPane.add(jLabel2);
-        jLabel2.setBounds(500, 20, 260, 410);
+        jLabel2.setBounds(660, 100, 260, 410);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Cadastrar");
@@ -85,6 +85,7 @@ public class MainForm extends javax.swing.JFrame {
 
         CadastroL.setMnemonic('s');
         CadastroL.setText("Livro");
+        CadastroL.addActionListener(this::CadastroLActionPerformed);
         fileMenu.add(CadastroL);
 
         CadastroC.setMnemonic('x');
@@ -105,26 +106,28 @@ public class MainForm extends javax.swing.JFrame {
         editMenu.setMnemonic('e');
         editMenu.setText("Consultar");
 
-        openMenuItem1.setMnemonic('o');
-        openMenuItem1.setText("Usuário");
-        editMenu.add(openMenuItem1);
+        ConsultarUs.setMnemonic('o');
+        ConsultarUs.setText("Usuário");
+        ConsultarUs.addActionListener(this::ConsultarUsActionPerformed);
+        editMenu.add(ConsultarUs);
 
-        saveMenuItem1.setMnemonic('s');
-        saveMenuItem1.setText("Livro");
-        editMenu.add(saveMenuItem1);
+        ConsultarLi.setMnemonic('s');
+        ConsultarLi.setText("Livro");
+        ConsultarLi.addActionListener(this::ConsultarLiActionPerformed);
+        editMenu.add(ConsultarLi);
 
-        exitMenuItem1.setMnemonic('x');
-        exitMenuItem1.setText("Categoria");
-        exitMenuItem1.addActionListener(this::exitMenuItem1ActionPerformed);
-        editMenu.add(exitMenuItem1);
+        ConsultarCa.setMnemonic('x');
+        ConsultarCa.setText("Categoria");
+        ConsultarCa.addActionListener(this::ConsultarCaActionPerformed);
+        editMenu.add(ConsultarCa);
 
-        saveAsMenuItem2.setMnemonic('a');
-        saveAsMenuItem2.setText("Empréstimo");
-        editMenu.add(saveAsMenuItem2);
+        ConsultarEm.setMnemonic('a');
+        ConsultarEm.setText("Empréstimo");
+        editMenu.add(ConsultarEm);
 
-        saveAsMenuItem3.setMnemonic('a');
-        saveAsMenuItem3.setText("Devolução");
-        editMenu.add(saveAsMenuItem3);
+        ConsultarDe.setMnemonic('a');
+        ConsultarDe.setText("Devolução");
+        editMenu.add(ConsultarDe);
 
         menuBar.add(editMenu);
 
@@ -134,22 +137,33 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastroCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroCActionPerformed
+
+                CadastrarCategoria form = new CadastrarCategoria();
+                desktopPane.add(form);
+                form.setVisible(true);
+        
+
     }//GEN-LAST:event_CadastroCActionPerformed
 
-    private void exitMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItem1ActionPerformed
+    private void ConsultarCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarCaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_exitMenuItem1ActionPerformed
+        
+                ConsultarCategoria form = new ConsultarCategoria();
+                desktopPane.add(form);
+                form.setVisible(true);
+        
+    }//GEN-LAST:event_ConsultarCaActionPerformed
 
     private void CadastroUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroUActionPerformed
 
@@ -201,27 +215,32 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jBcadastroMainActionPerformed
 
     private void jBconsultaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBconsultaMainActionPerformed
-        
+    
+    try{    
        Integer op = Integer.parseInt(JOptionPane.showInputDialog(null,"O que deseja consultar?\n[1] Usuario\n"
                 + "[2] Livro\n"
                 + "[3] Categoria\n"
                 + "[4] Empréstimo\n"
                 + "[5] Devolução\n" )) ;
 
+
        if (op != null) { //houve resposta
         switch (op) {
             case 1:
+                ConsultarUsuario form = new ConsultarUsuario();
+                desktopPane.add(form);
+                form.setVisible(true);
                 break;
                 
-                case 2:
-                ConsultarLivros form3 = new ConsultarLivros();
-                desktopPane.add(form3);
-                form3.setVisible(true);
+            case 2:
+                ConsultarLivros form1 = new ConsultarLivros();
+                desktopPane.add(form1);
+                form1.setVisible(true);
                  break;
             case 3:
-                ConsultarCategoria form4 = new ConsultarCategoria();
-                desktopPane.add(form4);
-                form4.setVisible(true);
+                ConsultarCategoria form2 = new ConsultarCategoria();
+                desktopPane.add(form2);
+                form2.setVisible(true);
                 
                 break;
             case 4: //emprestimo
@@ -232,8 +251,39 @@ public class MainForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Opção inválida!");
         }
        }
+      }catch(Exception err){
+         JOptionPane.showMessageDialog(null, "Opção inválida!");
+
+      }
        
     }//GEN-LAST:event_jBconsultaMainActionPerformed
+
+    private void CadastroLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroLActionPerformed
+
+                CadastrarLivro form = new CadastrarLivro();
+                desktopPane.add(form);
+                form.setVisible(true);
+        
+    }//GEN-LAST:event_CadastroLActionPerformed
+
+    private void ConsultarLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarLiActionPerformed
+
+        // TODO add your handling code here:
+                ConsultarLivros form = new ConsultarLivros();
+                desktopPane.add(form);
+                form.setVisible(true);
+        
+        
+    }//GEN-LAST:event_ConsultarLiActionPerformed
+
+    private void ConsultarUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarUsActionPerformed
+        // TODO add your handling code here:
+        
+        ConsultarUsuario form = new ConsultarUsuario();
+        desktopPane.add(form);
+        form.setVisible(true);
+        
+    }//GEN-LAST:event_ConsultarUsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,19 +326,19 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem CadastroE;
     private javax.swing.JMenuItem CadastroL;
     private javax.swing.JMenuItem CadastroU;
+    private javax.swing.JMenuItem ConsultarCa;
+    private javax.swing.JMenuItem ConsultarDe;
+    private javax.swing.JMenuItem ConsultarEm;
+    private javax.swing.JMenuItem ConsultarLi;
+    private javax.swing.JMenuItem ConsultarUs;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem1;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jBcadastroMain;
     private javax.swing.JButton jBconsultaMain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem1;
-    private javax.swing.JMenuItem saveAsMenuItem2;
-    private javax.swing.JMenuItem saveAsMenuItem3;
-    private javax.swing.JMenuItem saveMenuItem1;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -4,12 +4,17 @@
  */
 package com.mycompany.sistbiblioteca;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author afonsvfdeb
  */
 public class CadastroUsuario extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form CadastroUsuario
      */
@@ -37,6 +42,8 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTdataNasc = new javax.swing.JTextField();
         jBcadastrar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTtelefone = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Cadastro de usuários");
@@ -59,9 +66,15 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Data de Nascimento");
 
-        jTdataNasc.setText("(formato XX-XX-XXXX)");
+        jTdataNasc.setText("(formato dd/MM/yyyy)");
+        jTdataNasc.addActionListener(this::jTdataNascActionPerformed);
 
         jBcadastrar.setText("Cadastrar");
+        jBcadastrar.addActionListener(this::jBcadastrarActionPerformed);
+
+        jLabel6.setText("Telefone");
+
+        jTtelefone.addActionListener(this::jTtelefoneActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,27 +83,31 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTemail, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(jTnome, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(jTcpf)
+                            .addComponent(jTendereco, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(jTdataNasc)
+                            .addComponent(jTtelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTemail, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(jTnome, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(jTcpf)
-                    .addComponent(jTendereco, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(jTdataNasc))
-                .addContainerGap(134, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBcadastrar)
-                .addGap(214, 214, 214))
+                        .addGap(202, 202, 202)
+                        .addComponent(jBcadastrar)))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,13 +128,17 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTtelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTdataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
                 .addComponent(jBcadastrar)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(9, 9, 9))
         );
 
         pack();
@@ -139,6 +160,67 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTenderecoActionPerformed
 
+    private void jBcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcadastrarActionPerformed
+        // TODO add your handling code here:
+        
+        DAO banco = new DAO();
+        
+        String cpf = jTcpf.getText();
+        String nome = jTnome.getText();
+        String endereco = jTendereco.getText();
+        String email = jTemail.getText();
+        String telefone = jTtelefone.getText();
+        
+        LocalDate data = null;
+        boolean data_valida = true;
+        
+        try{
+        
+        String textoData = jTdataNasc.getText();
+        
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //converter o texto para localdate do java
+        data = LocalDate.parse(textoData, formatador);
+        
+            
+        }
+        catch(DateTimeParseException ex){
+            JOptionPane.showMessageDialog(rootPane, "Digite a data no formato dd/MM/yyyy");
+            data_valida = false;
+        }
+        
+        if(data_valida && !nome.isEmpty() && !email.isEmpty()){
+            String comando = "INSERT into usuario(cpf, nome, email, telefone, data_nasc, endereco) VALUES('"
+                + cpf + "','" + nome + "','" + email + "','"
+                + telefone + "','" + data + "','" + endereco + "');";
+
+            banco.inserir(comando);            
+            jTnome.setText("");
+            jTcpf.setText("");
+            jTendereco.setText("");
+            jTemail.setText("");
+            jTtelefone.setText("");
+            jTdataNasc.setText("");
+            
+        }
+        else if(data_valida) JOptionPane.showMessageDialog(rootPane, "Nome ou e-mail não podem ser vazios!");
+
+        
+       
+        
+ 
+        
+        
+    }//GEN-LAST:event_jBcadastrarActionPerformed
+
+    private void jTdataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTdataNascActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTdataNascActionPerformed
+
+    private void jTtelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTtelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTtelefoneActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcadastrar;
@@ -147,10 +229,12 @@ public class CadastroUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTcpf;
     private javax.swing.JTextField jTdataNasc;
     private javax.swing.JTextField jTemail;
     private javax.swing.JTextField jTendereco;
     private javax.swing.JTextField jTnome;
+    private javax.swing.JTextField jTtelefone;
     // End of variables declaration//GEN-END:variables
 }
