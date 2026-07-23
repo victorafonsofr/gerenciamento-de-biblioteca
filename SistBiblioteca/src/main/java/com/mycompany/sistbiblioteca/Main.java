@@ -40,7 +40,7 @@ public class Main extends javax.swing.JFrame {
         deleteMenuItem = new javax.swing.JMenuItem();
         ConsultarMenu = new javax.swing.JMenu();
         consultcategoriasmenu = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        menuConsultaLivros = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +76,8 @@ public class Main extends javax.swing.JFrame {
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
+        copyMenuItem.setText("Categoria");
+        copyMenuItem.addActionListener(this::copyMenuItemActionPerformed);
         editMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
@@ -97,9 +98,10 @@ public class Main extends javax.swing.JFrame {
         consultcategoriasmenu.addActionListener(this::consultcategoriasmenuActionPerformed);
         ConsultarMenu.add(consultcategoriasmenu);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        ConsultarMenu.add(aboutMenuItem);
+        menuConsultaLivros.setMnemonic('a');
+        menuConsultaLivros.setText("Livros");
+        menuConsultaLivros.addActionListener(this::menuConsultaLivrosActionPerformed);
+        ConsultarMenu.add(menuConsultaLivros);
 
         menuBar.add(ConsultarMenu);
 
@@ -134,6 +136,18 @@ public class Main extends javax.swing.JFrame {
         desktopPane.add(form);
         form.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void menuConsultaLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConsultaLivrosActionPerformed
+        ConsultarLivros form = new ConsultarLivros();
+        desktopPane.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_menuConsultaLivrosActionPerformed
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        CadastrarCategoria form = new CadastrarCategoria();    
+        desktopPane.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_copyMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,7 +187,6 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ConsultarMenu;
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem consultcategoriasmenu;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
@@ -183,6 +196,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuConsultaLivros;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;

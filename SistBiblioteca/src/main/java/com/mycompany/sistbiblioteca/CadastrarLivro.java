@@ -23,7 +23,7 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
      */
     public CadastrarLivro() {
         initComponents();
-        listarCursos();
+        listarCategorias();
     }
 
     /**
@@ -146,7 +146,7 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
-    public void listarCursos(){
+    public void listarCategorias(){
         try {
             String comando = "Select * FROM categoria;";
             DAO banco = new DAO();
