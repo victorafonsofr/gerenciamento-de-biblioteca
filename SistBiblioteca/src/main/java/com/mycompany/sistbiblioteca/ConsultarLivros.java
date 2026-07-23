@@ -40,6 +40,7 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
         jbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jbAtualizar = new javax.swing.JButton();
 
         jcbCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
 
@@ -48,16 +49,19 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Título", "Autor", "ISBN", "Quantidade"
+                "Título", "Autor", "ISBN", "Quantidade", "id"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jbAtualizar.setText("Atualizar");
+        jbAtualizar.addActionListener(this::jbAtualizarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,6 +72,8 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbConsultar)
+                        .addGap(75, 75, 75)
+                        .addComponent(jbAtualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jcbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -80,7 +86,8 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultar))
+                    .addComponent(jbConsultar)
+                    .addComponent(jbAtualizar))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -93,9 +100,9 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
             DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
             String comando;
             if(jcbCategorias.getSelectedIndex()==0){
-                comando = "SELECT titulo,autor,isbn,quantidade FROM livro";
+                comando = "SELECT titulo,autor,isbn,quantidade,id FROM livro";
             }else{
-                comando = "SELECT titulo,autor,isbn,quantidade FROM livro where categoria_id='"+jcbCategorias.getSelectedIndex()+"';";
+                comando = "SELECT titulo,autor,isbn,quantidade,id FROM livro where categoria_id='"+jcbCategorias.getSelectedIndex()+"';";
             }
             model.setNumRows(0);
             res = banco.consultar(comando);
@@ -105,6 +112,7 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
                     res.getString("autor"),
                     res.getString("isbn"),
                     res.getString("quantidade"),
+                    res.getString("id")
                 });
             }
         } catch (SQLException ex) {
@@ -112,6 +120,22 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
+       DAO banco = new DAO();
+       DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+       String comando = "UPDATE livro set titulo='"+
+                model.getValueAt(jTable1.getSelectedRow(), 0)+
+                "',autor='"+model.getValueAt(jTable1.getSelectedRow(),1)+
+               "',isbn='"+model.getValueAt(jTable1.getSelectedRow(), 2)+
+               "',quantidade="+model.getValueAt(jTable1.getSelectedRow(), 3)+
+               " WHERE id="+
+                model.getValueAt(jTable1.getSelectedRow(), 4)+
+                ";";
+       //UPDATE livro set titulo='TT', autor='AA' ,isbn='00',quantidade=0 where categoria_id=
+        banco.atualizar(comando);
+        JOptionPane.showMessageDialog(rootPane,"registro atualizado! ");
+    }//GEN-LAST:event_jbAtualizarActionPerformed
     public void listarCategorias(){
             try {
                 String comando = "Select * FROM categoria;";
@@ -129,6 +153,7 @@ public class ConsultarLivros extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbConsultar;
     private javax.swing.JComboBox<String> jcbCategorias;
     // End of variables declaration//GEN-END:variables
