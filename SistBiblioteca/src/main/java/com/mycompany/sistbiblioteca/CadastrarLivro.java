@@ -130,11 +130,20 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
 
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
         DAO banco = new DAO();
-        String comando = "INSERTO into livro VALUES('"+jtTitulo.getText()+
-                "','"+ jtAutor.getText()+"',"+
+        String comando = "INSERT into livro(titulo,autor,isbn,quantidade,categoria_id) VALUES('"+jtTitulo.getText()+
+                "','"+ jtAutor.getText()+"','"+
+                jtisbn.getText()+"',"+
                 jtQuantidade.getText()+","+
-                (jcbCategoria.getSelectedIndex()+1)+
+                (jcbCategoria.getSelectedIndex())+
                 ");" ;
+        
+        banco.inserir(comando);
+        JOptionPane.showMessageDialog(rootPane, "Registro inserido!");
+        jtAutor.setText("");
+        jtQuantidade.setText("");
+        jtTitulo.setText("");
+        jtisbn.setText("");
+        
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     public void listarCursos(){
@@ -143,7 +152,7 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
             DAO banco = new DAO();
             res = banco.consultar(comando);
             while(res.next()){
-                jcbCategoria.addItem(res.getString("descricao00"));
+                jcbCategoria.addItem(res.getString("descricao"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao consultar");
