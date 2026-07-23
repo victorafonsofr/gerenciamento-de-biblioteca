@@ -4,12 +4,21 @@
  */
 package com.mycompany.sistbiblioteca;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author teste123
  */
 public class ConsultarCategoria extends javax.swing.JInternalFrame {
-
+    private Connection con; // guarda informacoes da conexao
+    private Statement stm; // guadrda informacoes da instancia de conexao criada
+    private ResultSet res; // guarda lista de dados consultados
     /**
      * Creates new form ConsultarCategoria
      */
@@ -28,27 +37,34 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
 
         jbConsultar = new javax.swing.JButton();
         jbAtualizar = new javax.swing.JButton();
-        jbExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         jbConsultar.setText("Consultar");
+        jbConsultar.addActionListener(this::jbConsultarActionPerformed);
 
         jbAtualizar.setText("Atualizar");
-
-        jbExcluir.setText("Excluir");
+        jbAtualizar.addActionListener(this::jbAtualizarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Categoria ID", "Descrição"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -57,35 +73,58 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbConsultar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAtualizar)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jbConsultar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jbAtualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
-                .addComponent(jbExcluir)
-                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbConsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAtualizar)
-                    .addComponent(jbExcluir))
-                .addGap(75, 75, 75))
+                    .addComponent(jbConsultar))
+                .addGap(69, 69, 69))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DAO banco = new DAO();
+        String comando = "SELECT * FROM categoria;";
+        model.setNumRows(0);
+        res = banco.consultar(comando);
+        try {
+            while(res.next()){
+                model.addRow(new Object[]{
+                res.getString("id"),
+                res.getString("descricao")
+                });
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao consultar dados");
+        }
+    }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
+        DAO banco = new DAO();
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        String comando = "UPDATE categoria set descricao='"+
+                model.getValueAt(jTable1.getSelectedRow(), 1)+
+                "' WHERE id='"+
+                model.getValueAt(jTable1.getSelectedRow(), 0)+
+                "';";
+        banco.atualizar(comando);
+        JOptionPane.showMessageDialog(rootPane,"registro atualizado! ");
+    }//GEN-LAST:event_jbAtualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -93,6 +132,5 @@ public class ConsultarCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbConsultar;
-    private javax.swing.JButton jbExcluir;
     // End of variables declaration//GEN-END:variables
 }

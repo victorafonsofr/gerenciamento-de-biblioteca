@@ -4,17 +4,26 @@
  */
 package com.mycompany.sistbiblioteca;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author teste123
  */
 public class CadastrarLivro extends javax.swing.JInternalFrame {
-
+    private Connection con; // guarda informacoes da conexao
+    private Statement stm; // guadrda informacoes da instancia de conexao criada
+    private ResultSet res; // guarda lista de dados consultados
     /**
      * Creates new form CadastrarLivro
      */
     public CadastrarLivro() {
         initComponents();
+        listarCursos();
     }
 
     /**
@@ -31,49 +40,83 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
         jcbCategoria = new javax.swing.JComboBox<>();
         jlCategoria = new javax.swing.JLabel();
         jbCadastrar = new javax.swing.JButton();
+        jlAutor = new javax.swing.JLabel();
+        jtAutor = new javax.swing.JTextField();
+        jlisbn = new javax.swing.JLabel();
+        jtisbn = new javax.swing.JTextField();
+        jlquantidade = new javax.swing.JLabel();
+        jtQuantidade = new javax.swing.JTextField();
 
         jlTitulo.setText("Título");
 
-        jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jcbCategoria.addActionListener(this::jcbCategoriaActionPerformed);
 
         jlCategoria.setText("Categoria");
 
         jbCadastrar.setText("Cadastrar");
+        jbCadastrar.addActionListener(this::jbCadastrarActionPerformed);
+
+        jlAutor.setText("Autor");
+
+        jlisbn.setText("isbn");
+
+        jlquantidade.setText("Quantidade");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jlTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCategoria)
-                    .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(jbCadastrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(jlCategoria))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jbCadastrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlquantidade)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jtQuantidade, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                    .addComponent(jlTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlAutor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtAutor, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(48, 48, 48)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbCategoria, 0, 110, Short.MAX_VALUE)
+                                    .addComponent(jlisbn)
+                                    .addComponent(jtisbn))))))
+                .addGap(19, 98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTitulo)
                     .addComponent(jlCategoria))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlAutor)
+                    .addComponent(jlisbn))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtisbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jlquantidade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jbCadastrar)
                 .addGap(53, 53, 53))
         );
@@ -81,12 +124,54 @@ public class CadastrarLivro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCategoriaActionPerformed
 
+    private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
+        DAO banco = new DAO();
+        String comando = "INSERT into livro(titulo,autor,isbn,quantidade,categoria_id) VALUES('"+jtTitulo.getText()+
+                "','"+ jtAutor.getText()+"','"+
+                jtisbn.getText()+"',"+
+                jtQuantidade.getText()+","+
+                (jcbCategoria.getSelectedIndex())+
+                ");" ;
+        
+        banco.inserir(comando);
+        JOptionPane.showMessageDialog(rootPane, "Registro inserido!");
+        jtAutor.setText("");
+        jtQuantidade.setText("");
+        jtTitulo.setText("");
+        jtisbn.setText("");
+        
+    }//GEN-LAST:event_jbCadastrarActionPerformed
+
+    public void listarCursos(){
+        try {
+            String comando = "Select * FROM categoria;";
+            DAO banco = new DAO();
+            res = banco.consultar(comando);
+            while(res.next()){
+                jcbCategoria.addItem(res.getString("descricao"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao consultar");
+        }
+        
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JComboBox<String> jcbCategoria;
+    private javax.swing.JLabel jlAutor;
     private javax.swing.JLabel jlCategoria;
     private javax.swing.JLabel jlTitulo;
+    private javax.swing.JLabel jlisbn;
+    private javax.swing.JLabel jlquantidade;
+    private javax.swing.JTextField jtAutor;
+    private javax.swing.JTextField jtQuantidade;
     private javax.swing.JTextField jtTitulo;
+    private javax.swing.JTextField jtisbn;
     // End of variables declaration//GEN-END:variables
 }
