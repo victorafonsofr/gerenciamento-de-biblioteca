@@ -178,10 +178,16 @@ public class MainForm extends javax.swing.JFrame {
                 break;
                 
                 case 2:
-                // abrirCadastroLivro();
+                CadastrarLivro form1 = new CadastrarLivro();
+                desktopPane.add(form1);
+                form1.setVisible(true);
                 break;
             case 3:
-                // abrirCadastroCategoria();
+                
+                CadastrarCategoria form2 = new CadastrarCategoria();    
+                desktopPane.add(form2);
+                form2.setVisible(true);
+                
                 break;
             case 4: //emprestimo
                 break;
@@ -208,10 +214,15 @@ public class MainForm extends javax.swing.JFrame {
                 break;
                 
                 case 2:
-                // abrirCadastroLivro();
-                break;
+                ConsultarLivros form3 = new ConsultarLivros();
+                desktopPane.add(form3);
+                form3.setVisible(true);
+                 break;
             case 3:
-                // abrirCadastroCategoria();
+                ConsultarCategoria form4 = new ConsultarCategoria();
+                desktopPane.add(form4);
+                form4.setVisible(true);
+                
                 break;
             case 4: //emprestimo
                 break;
