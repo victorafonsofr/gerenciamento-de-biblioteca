@@ -3,4 +3,5 @@ com\mycompany\sistbiblioteca\MainForm$1.class
 POJO\Usuario.class
 com\mycompany\sistbiblioteca\ConsultarLivros.class
 com\mycompany\sistbiblioteca\SistBiblioteca.class
+com\mycompany\sistbiblioteca\CadastrarCategoria.class
 com\mycompany\sistbiblioteca\MainForm.class

@@ -76,7 +76,8 @@ public class Main extends javax.swing.JFrame {
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
+        copyMenuItem.setText("Categoria");
+        copyMenuItem.addActionListener(this::copyMenuItemActionPerformed);
         editMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
@@ -141,6 +142,12 @@ public class Main extends javax.swing.JFrame {
         desktopPane.add(form);
         form.setVisible(true);
     }//GEN-LAST:event_menuConsultaLivrosActionPerformed
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        CadastrarCategoria form = new CadastrarCategoria();    
+        desktopPane.add(form);
+        form.setVisible(true);
+    }//GEN-LAST:event_copyMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
